@@ -8,7 +8,6 @@ const submitForm = document.querySelector(".submit-form");
 const title = document.getElementById("title");
 const author = document.getElementById("author_name");
 const pages = document.getElementById("pages");
-const removeBook = document.querySelector(".remove");
 const form = document.getElementById("form");
 const myLibrary = [];
 
@@ -54,6 +53,13 @@ function displayHTML(title, author, pages) {
   mainContainer.insertAdjacentHTML("beforeend", html);
 }
 
+function removeBook(event) {
+  if (!event.target.classList.contains("remove")) return;
+  const getBookID = event.target
+    .closest("div[data-id]")
+    .getAttribute("data-id");
+  // myLibrary.find((book) => book.id === getBookID).;
+}
 addBookBtn.addEventListener("click", openModal);
 
 document.addEventListener("keydown", closeModal);
@@ -61,7 +67,4 @@ document.addEventListener("keydown", closeModal);
 submitForm.addEventListener("click", addBookToLibrary);
 
 // Added event propagation to listen on events for dynamically created HTML elements
-mainContainer.addEventListener("click", function (e) {
-  if (!e.target.classList.contains("remove")) return;
-  e.target.closest("div[data-id]").remove();
-});
+mainContainer.addEventListener("click", removeBook);
