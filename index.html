@@ -29,7 +29,23 @@
       </main>
     </div>
     <div class="modal hidden">
-      <p>test</p>
+      <form>
+        <div>
+          <label for="title">Title:</label>
+        </div>
+        <input type="text" id="title" name="title" />
+        <div>
+          <label for="author_name">Author:</label>
+        </div>
+        <input type="text" id="author_name" name="author_name" />
+        <div>
+          <label for="pages">Pages:</label>
+        </div>
+        <input type="text" id="pages" name="pages" min="1" />
+        <div>
+          <button type="submit" class=".submit-form">Submit</button>
+        </div>
+      </form>
     </div>
     <div class="overlay hidden"></div>
   </body>
