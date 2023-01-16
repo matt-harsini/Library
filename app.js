@@ -8,18 +8,22 @@ const submitForm = document.querySelector(".submit-form");
 const title = document.getElementById("title");
 const author = document.getElementById("author_name");
 const pages = document.getElementById("pages");
+const removeBook = document.querySelector(".remove");
+const form = document.getElementById("form");
 const myLibrary = [];
 
 function Book(title, author, pages) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.id = myLibrary.length || 0;
 }
 
 function addBookToLibrary(event) {
   event.preventDefault();
   myLibrary.push(new Book(title.value, author.value, pages.value));
   displayHTML(title.value, author.value, pages.value);
+  form.reset();
 }
 
 function closeModal(event) {
@@ -36,12 +40,14 @@ function openModal() {
 
 function displayHTML(title, author, pages) {
   const html = `
-  <div class="book">
+  <div class="book" data-id="${myLibrary[myLibrary.length - 1].id}">
     <p>${title}</p>
     <p>${author}</p>
     <p>${pages}</p>
     <div class="button-group">
-      <button class="btn remove">Remove</button>
+      <button class="btn remove" data-index="${
+        myLibrary.length - 1
+      }">Remove</button>
     </div>
   </div>
   `;
@@ -53,3 +59,9 @@ addBookBtn.addEventListener("click", openModal);
 document.addEventListener("keydown", closeModal);
 
 submitForm.addEventListener("click", addBookToLibrary);
+
+// Added event propagation to listen on events for dynamically created HTML elements
+mainContainer.addEventListener("click", function (e) {
+  if (!e.target.classList.contains("remove")) return;
+  e.target.closest("div[data-id]").remove();
+});
