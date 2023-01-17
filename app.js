@@ -69,5 +69,5 @@ document.addEventListener("keydown", closeModal);
 
 submitForm.addEventListener("click", addBookToLibrary);
 
-// Added event propagation to listen on events for dynamically created HTML elements
+// Added event propagation to listen for events on dynamically created HTML elements
 mainContainer.addEventListener("click", removeBook);
