@@ -58,7 +58,10 @@ function removeBook(event) {
   const getBookID = event.target
     .closest("div[data-id]")
     .getAttribute("data-id");
-  // myLibrary.find((book) => book.id === getBookID).;
+  const getBook = myLibrary.find((book) => book.id === +getBookID);
+  const getBookIndex = myLibrary.findIndex((book) => book === getBook);
+  myLibrary.splice(getBookIndex, getBookIndex + 1);
+  event.target.closest(".book").remove();
 }
 addBookBtn.addEventListener("click", openModal);
 
